@@ -51,9 +51,9 @@ C) added Churn
 D) refactored the package structure: 
     D1) Simulator runner class is now located in p2psim package
 E) removed most of the singletons: now there is one main singleton - Simulator.class, which acts as facade and offers access to most required functions (like scheduling, virtual time etc.)
-F) Virtual time is now divided in units (secondes, milliseconds etc.) - you can access those via the Simulator's constants
+F) Virtual time is now divided in units (seconds, milliseconds etc.) - you can access those via the Simulator's constants
 G) This time can now also be specified in the config files, e.g. now you say "10s" for 10 seconds delay which is the 
-same as calling "10*Simulator.SECOND_UNIT" in the programm code. 
+same as calling "10*Simulator.SECOND_UNIT" in the program code. 
 
 PART 2: Functional changes
 ==========================================
@@ -67,7 +67,7 @@ There are several ways to handle this efficient.
     a) For each class use the "Organize imports" function of Eclipse, accessible via the Ctrl-Shift-O shortcut, which will fix them automatically or ask you to select one for ambiqious imports
     b) Simultaneous Search-and-Replace for the whole project. This function is not very comfortable in Eclipse so if you know a nice tool to do this - please share your knowledge with us :) 
     In Eclipse you can do this via "Search"->"File", here you can insert the wrong line, e.g. "import de.tud.p2psim.OLDPACKAGE.FOO" as the search string, set file pattern to *.java, the scope to "Choose"->Your project name and press "Replace". In the appearing dialog you can put the line to replace with, e.g "import de.tud.p2psim.NEWPACKAGE.NEWNAME_OF_FOO" and then to select "Replace All" or to go throgh the files and decide what to do via "Replace", "Skip" etc.
-    The bad thing abouth this way is that you have to do this for each replacement line individually. A nice tool would be able to read from a file with the replacement mappings and perform them automatically. Yes, we could write a script or even a java program to do this, so if you have time to do this, please, share your code with us. 
+    The bad thing about this way is that you have to do this for each replacement line individually. A nice tool would be able to read from a file with the replacement mappings and perform them automatically. Yes, we could write a script or even a java program to do this, so if you have time to do this, please, share your code with us. 
     
 Here we try to summarize all renamings and movements of classes and interfaces for your convinience (you can see them by your own if you go to the Team->Synchronize View of the Simulator project)
    
@@ -111,7 +111,7 @@ Here we try to summarize all renamings and movements of classes and interfaces f
     	- MessageManager has been renamed to TransLayer
     	- TransportAddress has been renamed to TransInfo
     	- ServiceCategory has been renamed to TransProtocol
-    	- MessageReceiver has been renamed and splitted into TransMessageListener and TransMessageCallback 
+    	- MessageReceiver has been renamed and split into TransMessageListener and TransMessageCallback 
  
         
 		* de.tud.kom.p2psim.api.transport.TransProtocol: 
@@ -155,7 +155,7 @@ Here we try to summarize all renamings and movements of classes and interfaces f
 		the de.tud.kom.p2psim.api.common.Monitor interface. A default implementation is provided 
 		in de.tud.kom.p2psim.impl.common. Each specific analyzer has the possibility
 		to implement different component analyzers such as the NetAnalyzer in order to receive component
-		specific events. Thus, for example, the sending/receiving/droping of messages at the
+		specific events. Thus, for example, the sending/receiving/dropping of messages at the
 		NetWrapper of each host can be traced and evaluated later on. Several analyzers per simulation
 		are allowed and can be specified in the xml-description file as follows:
 		
@@ -178,7 +178,7 @@ Here we try to summarize all renamings and movements of classes and interfaces f
 				** removed them from the Component interface
 
 	* Main Simulator Class and other singletons:
-		* The Simulator is tun now via de.tud.kom.p2psim.SimulatorRunner
+		* The Simulator is run now via de.tud.kom.p2psim.SimulatorRunner
 		* Simulator-Class was moved to impl and is now accessible via getInstance() or other
 			static methods -> Facade Design Pattern (and Singleton too)
 		* DefaultSimulator is merged with the Simulator class
