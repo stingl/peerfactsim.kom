@@ -56,7 +56,6 @@ public class ClientMaintenanceOperation extends
 	@Override
 	protected void execute() {
 		if (Simulator.getCurrentTime() - node.getLastUpdate() > CSConfiguration.TIME_OUT_SERVER) {
-			node.reset();
 			node.join();
 			// to stop the reply of this operation
 			if (log.isInfoEnabled())
