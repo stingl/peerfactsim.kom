@@ -147,7 +147,7 @@ public class ClientNode extends AbstractIDONode<ClientID> {
 		if (ce.isOnline() && inGame) {
 			join();
 		} else {
-			reset();
+			stop();
 			setPeerStatus(PeerStatus.ABSENT);
 		}
 
@@ -160,15 +160,14 @@ public class ClientNode extends AbstractIDONode<ClientID> {
 			LeaveOperation op = new LeaveOperation(this);
 			op.scheduleImmediately();
 		}
-		reset();
+		stop();
 		setPeerStatus(PeerStatus.ABSENT);
 	}
 
 	/**
-	 * Resets the node. It stopped the operation, clean the storage, set the
-	 * PeerStatus to absent, serverTransInfo to null.
+	 * Stops the operation of this node.
 	 */
-	public void reset() {
+	public void stop() {
 		if (heartbeatOperation != null) {
 			heartbeatOperation.stop();
 			heartbeatOperation = null;
@@ -181,6 +180,15 @@ public class ClientNode extends AbstractIDONode<ClientID> {
 			joinOp.stop();
 			joinOp = null;
 		}
+
+	}
+
+	/**
+	 * Resets the node. Stops the operation, sets the storage back, sets the
+	 * peer status to absent and set the serverTransInfo to null.
+	 */
+	public void reset() {
+		stop();
 		storage = new ClientStorage();
 		setPeerStatus(PeerStatus.ABSENT);
 		serverTransInfo = null;
@@ -199,6 +207,7 @@ public class ClientNode extends AbstractIDONode<ClientID> {
 	 * hearbeat Operation and maintenace Operation.
 	 */
 	public void join() {
+		reset();
 		JoinOperation op = new JoinOperation(this,
 				new OperationCallback<Object>() {
 
